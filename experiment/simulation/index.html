@@ -1,13 +1,368 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<!-- Add CSS at the head of HTML file -->
-    <link rel="stylesheet" href="./css/main.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TLC Simulation</title>
+
+<style>
+body{
+    margin:0;
+    padding:20px;
+    font-family:'Segoe UI',sans-serif;
+    background:linear-gradient(135deg,#dbeafe,#f0f9ff);
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.15);
+}
+
+h1{
+    text-align:center;
+    color:#0f172a;
+    border-bottom:3px solid #2563eb;
+    padding-bottom:15px;
+    margin-bottom:40px;
+}
+
+.row{
+    display:flex;
+    align-items:center;
+    margin-bottom:25px;
+    gap:20px;
+}
+
+.left{
+    min-width:220px;
+    font-size:18px;
+    font-weight:600;
+    color:#1e293b;
+}
+
+.right{
+    flex:1;
+}
+
+select{
+    width:100%;
+    max-width:420px;
+    padding:12px;
+    border:2px solid #cbd5e1;
+    border-radius:10px;
+    font-size:15px;
+    background:#f8fafc;
+}
+
+select:focus{
+    outline:none;
+    border-color:#2563eb;
+}
+
+button{
+    margin-top:15px;
+    padding:12px 30px;
+    border:none;
+    border-radius:10px;
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+    color:white;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 5px 15px rgba(37,99,235,.4);
+}
+
+.rf-section{
+    display:flex;
+    gap:30px;
+    margin-top:40px;
+    flex-wrap:wrap;
+}
+
+.rf-box{
+    flex:1;
+    min-width:350px;
+    background:#f8fafc;
+    padding:25px;
+    border-radius:15px;
+    border-left:6px solid #2563eb;
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+}
+
+.rf-box h3{
+    margin-top:0;
+    color:#1e40af;
+}
+
+.rf-box p{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:18px;
+}
+
+.rf-box input{
+    width:120px;
+    padding:8px;
+    border:2px solid #cbd5e1;
+    border-radius:8px;
+    background:white;
+    font-weight:bold;
+    text-align:center;
+}
+
+.note{
+    margin-top:40px;
+    padding:15px;
+    text-align:center;
+    background:#dbeafe;
+    border-radius:10px;
+    color:#1e40af;
+    font-weight:bold;
+    font-size:18px;
+}
+
+#explanation{
+    display:none;
+    margin-top:50px;
+    background:#eff6ff;
+    padding:30px;
+    border-radius:15px;
+    border-left:8px solid #2563eb;
+}
+
+#explanation h2{
+    margin-top:0;
+    color:#1e40af;
+    font-size:35px;
+}
+
+#explanation p{
+    font-size:18px;
+    line-height:1.8;
+    color:#334155;
+}
+
+.station-info{
+    background:#f8fafc;
+    padding:15px 20px;
+    border-radius:12px;
+    margin-bottom:25px;
+    display:flex;
+    justify-content:space-between;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.station-info span{
+    font-size:18px;
+    color:#0f172a;
+}
+
+@media(max-width:768px){
+
+.rf-section{
+    flex-direction:column;
+}
+
+.station-info{
+    flex-direction:column;
+    gap:10px;
+}
+
+.left{
+    min-width:150px;
+}
+
+}
+.video-card{
+    width:70%;
+    max-width:1000px;
+    background:white;
+    padding:20px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+    margin:40px auto;
+}
+
+.video-card video{
+    width:100%;
+    border-radius:15px;
+    display:block;
+}
+
+@media (max-width: 768px){
+    .video-card{
+        width:95%;
+    }
+}
+
+.video-card h2{
+    text-align:center;
+    color:#1e40af;
+    margin-bottom:20px;
+}
+
+
+</style>
 </head>
 <body>
-		<!-- Your code goes here-->
 
-	<!-- Add JS at the bottom of HTML file --> 
-        <script src="./js/main.js"></script>
+<div class="container">
+   <div class="video-card">
+    <h2>Experiment Animation</h2>
+
+    <video controls autoplay muted loop>
+        <source src="images/Final_Exp2.mp4" type="video/mp4">
+    </video>
+</div>
+
+
+
+<h1>Simulation</h1>
+
+<div class="row">
+<div class="left">
+<b>Stationary Phase:</b> Cellulose
+</div>
+
+<div class="right">
+<b>Saturation time:</b> 15 minutes
+</div>
+</div>
+
+<div class="row">
+<div class="left">
+Solvent System:
+</div>
+
+<div class="right">
+<select id="one">
+<option>None</option>
+<option>[Acidic] (n-butanol: water: acetic acid (3:2:0.5)</option>
+<option>[Acidic] (n-butanol: water: acetic acid (3:1:1)</option>
+<option>[Basic] EtOH: water: ammonia (10:2.5:1.25)</option>
+<option>[Basic] (n-butanol: water: acetic acid (3:2:0.5)</option>
+</select>
+<br>
+<button id="submitBtn">Submit</button>
+</div>
+</div>
+
+<div class="rf-section">
+
+<div class="rf-box">
+<h3>Optimum Rf:</h3>
+
+<p>Aspartic acid: &nbsp;&nbsp;0.28</p>
+<p>Lysine: &nbsp;&nbsp;0.15</p>
+<p>Leucine: &nbsp;&nbsp;0.74</p>
+</div>
+
+<div class="rf-box">
+<h3>Simulation Rf:</h3>
+
+<p>
+Aspartic acid:
+<input type="text" id="aspartic" readonly>
+</p>
+
+<p>
+Lysine:
+<input type="text" id="lysine" readonly>
+</p>
+
+<p>
+Leucine:
+<input type="text" id="leucine" readonly>
+</p>
+
+</div>
+
+</div>
+
+<div class="note">
+RF VALUE IS DEPENDENT ON POLARITY OF SOLVENT SYSTEM
+</div>
+
+<div id="explanation">
+
+<h2>EXPLANATION:</h2>
+
+<p id="expText"></p>
+
+</div>
+
+</div>
+
+<script>
+
+const rfValues = {
+
+"[Acidic] (n-butanol: water: acetic acid (3:2:0.5)": {
+    aspartic: "0.28",
+    lysine: "0.15",
+    leucine: "0.74",
+    explanation:
+    "Amino acids exhibit different Rf values depending upon the pH of the solvent system. Acidic amino acids (Aspartic acid) shows increase in Rf values with increase acidic nature of the solvent system. Basic amino acids (Lysine) shows decrease in Rf values with increase in acidic nature of the solvent system. However, no mark effect is observed in neutral amino acid (Leucine). The reverse effects in terms of Rf value are obtained with basic nature of solvent system as expected."
+},
+
+"[Acidic] (n-butanol: water: acetic acid (3:1:1)": {
+    aspartic: "0.41",
+    lysine: "0.10",
+    leucine: "0.74",
+    explanation:
+    "Amino acids exhibit different Rf values depending upon the pH of the solvent system. Acidic amino acids (Aspartic acid) shows increase in Rf values with increase acidic nature of the solvent system. Basic amino acids (Lysine) shows decrease in Rf values with increase in acidic nature of the solvent system. However, no mark effect is observed in neutral amino acid (Leucine). The reverse effects in terms of Rf value are obtained with basic nature of solvent system as expected."
+},
+
+"[Basic] EtOH: water: ammonia (10:2.5:1.25)": {
+    aspartic: "0.25",
+    lysine: "0.16",
+    leucine: "0.74",
+    explanation:
+    "Amino acids exhibit different Rf values depending upon the pH of the solvent system. Acidic amino acids (Aspartic acid) shows increase in Rf values with increase acidic nature of the solvent system. Basic amino acids (Lysine) shows decrease in Rf values with increase in acidic nature of the solvent system. However, no mark effect is observed in neutral amino acid (Leucine). The reverse effects in terms of Rf value are obtained with basic nature of solvent system as expected."
+},
+
+"[Basic] (n-butanol: water: acetic acid (3:2:0.5)": {
+    aspartic: "0.21",
+    lysine: "0.19",
+    leucine: "0.73",
+    explanation:
+    "Amino acids exhibit different Rf values depending upon the pH of the solvent system. Acidic amino acids (Aspartic acid) shows increase in Rf values with increase acidic nature of the solvent system. Basic amino acids (Lysine) shows decrease in Rf values with increase in acidic nature of the solvent system. However, no mark effect is observed in neutral amino acid (Leucine). The reverse effects in terms of Rf value are obtained with basic nature of solvent system as expected."
+}
+
+};
+
+document.getElementById("submitBtn").addEventListener("click", function(){
+
+let solvent = document.getElementById("one").value;
+
+if(solvent === "None"){
+    alert("Please select a solvent system.");
+    return;
+}
+
+let data = rfValues[solvent];
+
+document.getElementById("aspartic").value = data.aspartic;
+document.getElementById("lysine").value = data.lysine;
+document.getElementById("leucine").value = data.leucine;
+
+document.getElementById("expText").innerHTML = data.explanation;
+
+document.getElementById("explanation").style.display = "block";
+
+});
+
+</script>
+
 </body>
 </html>

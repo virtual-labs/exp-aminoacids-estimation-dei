@@ -2,35 +2,86 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "This is a Sample Question 1?",
+      "question": "Which is the largest chain amino acid?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "Tryptophan",
+        "b": "Cysteine",
+        "c": "Lysine",
+        "d": "Aspartic acid"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "a": "Correct. Tryptophan has the largest side chain among the given amino acids due to its indole ring.",
+        "b": "Incorrect. Cysteine contains a thiol group but has a smaller side chain.",
+        "c": "Incorrect. Lysine has a long side chain but is smaller than tryptophan.",
+        "d": "Incorrect. Aspartic acid has a relatively small acidic side chain."
       },
       "correctAnswer": "a",
       "difficulty": "beginner"
     },
     {
-      "question": "This is a Sample Question 2?",
+      "question": "Which of the following amino acids is the smallest of all amino acids?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "Glycine",
+        "b": "Valine",
+        "c": "Alanine",
+        "d": "Serine"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "a": "Correct. Glycine has a hydrogen atom as its side chain, making it the smallest amino acid.",
+        "b": "Incorrect. Valine has a branched side chain.",
+        "c": "Incorrect. Alanine contains a methyl group.",
+        "d": "Incorrect. Serine contains a hydroxymethyl group."
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Which amino acid can react with itself to form a dimer by formation of a disulfide bond?",
+      "answers": {
+        "a": "Glutamic acid",
+        "b": "Cysteine",
+        "c": "Aspartic acid",
+        "d": "Methionine"
+      },
+      "explanations": {
+        "a": "Incorrect. Glutamic acid does not contain a sulfhydryl group.",
+        "b": "Correct. Two cysteine molecules can form a disulfide bond to produce cystine.",
+        "c": "Incorrect. Aspartic acid cannot form disulfide bonds.",
+        "d": "Incorrect. Methionine contains sulfur but cannot form disulfide bonds."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Methionine is ______ containing amino acid.",
+      "answers": {
+        "a": "Na",
+        "b": "S",
+        "c": "P",
+        "d": "Cl"
+      },
+      "explanations": {
+        "a": "Incorrect.",
+        "b": "Correct. Methionine is a sulfur-containing amino acid.",
+        "c": "Incorrect.",
+        "d": "Incorrect."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Which amino acid has two chiral centres?",
+      "answers": {
+        "a": "Leucine",
+        "b": "Lysine",
+        "c": "Isoleucine",
+        "d": "Cysteine"
+      },
+      "explanations": {
+        "a": "Incorrect. Leucine has only one chiral center.",
+        "b": "Incorrect. Lysine has only one chiral center.",
+        "c": "Correct. Isoleucine contains two chiral centers.",
+        "d": "Incorrect. Cysteine has one chiral center."
       },
       "correctAnswer": "c",
       "difficulty": "beginner"
