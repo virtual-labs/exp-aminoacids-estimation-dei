@@ -16,26 +16,53 @@
 
 Use of pre-coated cellulose HPTLC plates with n-butanol: acetic acid: water, 3:1:1, resulted in good separation of the amino acids at 520 nm. Regression analysis of the calibration data for amino acids showed that the dependent variable (peak area) and the independent variable (concentration) were represented by the equations Y = 4.713 +14.158x, Y = 1430.156 +13.59x and Y = 9115.893 + 28.082x for aspartic acid, lysine and leucine respectively. The correlation of coefficient (r2) obtained was 0.999, 0.998 and 0.997 respectively for aspartic acid, lysine and leucine respectively shows a good linear relationship. The concentration of aspartic acid, lysine and leucine in the coconut water was found to 0.07, 0.03 and 0.05% respectively with standard deviation of ±2.78 respectively.
 
-![Project Screenshot](images/obs2.jpg)
 
-Where, Peak 1= Lysine
+<div align="center">
 
-Peak 2= Aspartic acid
+<img src="images/obs2.jpg" alt="Chromatogram" width="700">
 
-Peak 3 = Leucine
+<p><b>Where, Peak 1 = Lysine<br>
+Peak 2 = Aspartic acid<br>
+Peak 3 = Leucine</b></p>
 
-![Project Screenshot](images/obs3.jpg)
+</div>
 
-Derivatized image of amino acids with ninhydrin
+<br>
 
-![Project Screenshot](images/obs4.jpg)
+<div align="center">
 
-Calibration curve of aspartic acid
+<img src="images/obs3.jpg" alt="Derivatized Image" width="700">
 
-![Project Screenshot](images/obs5.jpg)
+<p><b>Derivatized image of amino acids with ninhydrin</b></p>
 
-Calibration curve of lysine
+</div>
 
-![Project Screenshot](images/obs6.jpg)
+<br>
 
-Calibration curve of leucine
+<div align="center">
+
+<img src="images/obs4.jpg" alt="Calibration Curve of Aspartic Acid" width="700">
+
+<p><b>Calibration curve of Aspartic acid</b></p>
+
+</div>
+
+<br>
+
+<div align="center">
+
+<img src="images/obs5.jpg" alt="Calibration Curve of Lysine" width="700">
+
+<p><b>Calibration curve of lysine</b></p>
+
+</div>
+
+<br>
+
+<div align="center">
+
+<img src="images/obs6.jpg" alt="Calibration Curve of Leucine" width="700">
+
+<p><b>Calibration curve of leucine</b></p>
+
+</div>
