@@ -2,7 +2,7 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "Which is the largest chain amino acid?",
+      "question": "1. Which is the largest chain amino acid?",
       "answers": {
         "a": "Tryptophan",
         "b": "Cysteine",
@@ -19,7 +19,7 @@
       "difficulty": "beginner"
     },
     {
-      "question": "Which of the following amino acids is the smallest of all amino acids?",
+      "question": "2. Which of the following amino acids is the smallest of all amino acids?",
       "answers": {
         "a": "Glycine",
         "b": "Valine",
@@ -36,7 +36,7 @@
       "difficulty": "beginner"
     },
     {
-      "question": "Which amino acid can react with itself to form a dimer by formation of a disulfide bond?",
+      "question": "3. Which amino acid can react with itself to form a dimer by formation of a disulfide bond?",
       "answers": {
         "a": "Glutamic acid",
         "b": "Cysteine",
@@ -53,7 +53,7 @@
       "difficulty": "beginner"
     },
     {
-      "question": "Methionine is ______ containing amino acid.",
+      "question": "4. Methionine is ______ containing amino acid.",
       "answers": {
         "a": "Na",
         "b": "S",
@@ -70,7 +70,7 @@
       "difficulty": "beginner"
     },
     {
-      "question": "Which amino acid has two chiral centres?",
+      "question": "5. Which amino acid has two chiral centres?",
       "answers": {
         "a": "Leucine",
         "b": "Lysine",
