@@ -1,4 +1,4 @@
-### Procedure
+## Procedure
 
 - A stock solution of respective amino acids (aspartic acid, lysine and leucine) was prepared by dissolving individual amino acids (5mg) in water (1ml) and sonicated for 10 minutes over an ultrasonic bath and then makeup with ethanol (5ml) in the test tubes.
 - The solution was filtered through filter paper and filtrate was used as sample solution.
@@ -11,7 +11,7 @@
 - Amino acids are not UV active, so to visualize the bands plate was derivatized using ninhydrin reagent.
 - Plates were evaluated by densitometry at 520 nm with a Camag Scanner 3 for quantification.
 
-### Observation
+## Observation
 
 
 Use of pre-coated cellulose HPTLC plates with n-butanol: acetic acid: water, 3:1:1, resulted in good separation of the amino acids at 520 nm. Regression analysis of the calibration data for amino acids showed that the dependent variable (peak area) and the independent variable (concentration) were represented by the equations Y = 4.713 +14.158x, Y = 1430.156 +13.59x and Y = 9115.893 + 28.082x for aspartic acid, lysine and leucine respectively. The correlation of coefficient (r2) obtained was 0.999, 0.998 and 0.997 respectively for aspartic acid, lysine and leucine respectively shows a good linear relationship. The concentration of aspartic acid, lysine and leucine in the coconut water was found to 0.07, 0.03 and 0.05% respectively with standard deviation of ±2.78 respectively.
