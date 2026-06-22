@@ -1,4 +1,4 @@
-### Reagents
+## Reagents
 
 
 - Aspartic acid
@@ -14,7 +14,7 @@
 
 All chemicals used in this study must be of analytical grade.
 
-### Theory
+## Theory
 
 
 Amino acids are the building blocks of peptides and proteins. They possess two functional groups—the carboxylic acid and amino group giving acidic and basic characters. The common structure of amino acids:
