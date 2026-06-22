@@ -1,4 +1,4 @@
-### References
+## References
 
 
 1. Jonathan M. Stoddard, Lien Nguyen, Hector Mata-Chavez and Kelly Nguyen. TLC plates as a convenient platform for solvent-free reactions Chem. Commun., 2007, 1240 – 1241.
