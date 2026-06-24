@@ -1,337 +1,471 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TLC · Amino acid simulation</title>
-  <style>
-    /* ---- reset & base ---- */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TLC · Amino acid simulation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+    color: #102a43;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+}
+
+.header h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #102a43;
+    letter-spacing: -0.5px;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 8px;
+}
+
+.header h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 25%;
+    width: 50%;
+    height: 3px;
+    background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+    border-radius: 2px;
+}
+
+.header small {
+    font-size: 13px;
+    font-weight: 500;
+    background: #dce7f5;
+    padding: 4px 12px;
+    border-radius: 20px;
+    color: #1a3f6b;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+/* Main Layout */
+.app-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 20px;
+    flex-grow: 1;
+    min-height: 0; /* Ensures inner scrolling works correctly */
+}
+
+/* Panel Common Styles */
+.panel {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.panel h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #334e68;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Left Panel (Video) */
+.left-panel {
+    align-items: stretch;
+}
+
+.video-container {
+    flex-grow: 1;
+    min-height: 0;
+    background: #0f172a;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 2px 8px rgba(0,0,0,0.5);
+}
+
+.video-container video {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* Right Panel (Simulation) */
+.right-panel {
+    /* container style inherited */
+}
+
+.scrollable-content {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+/* Custom Scrollbar */
+.scrollable-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.scrollable-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.scrollable-content::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 3px;
+}
+
+.scrollable-content::-webkit-scrollbar-thumb:hover {
+    background-color: #94a3b8;
+}
+
+/* Metadata Badges */
+.meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.meta-badge {
+    background: #f0f4f8;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #486581;
+    border-left: 4px solid #3b82f6;
+}
+
+.meta-badge strong {
+    color: #102a43;
+    display: block;
+    margin-bottom: 2px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Control Row */
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.control-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #102a43;
+}
+
+.select-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.control-group select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    background: #f8fafc;
+    font-size: 15px;
+    font-family: inherit;
+    color: #334e68;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.control-group select:focus {
+    outline: none;
+    border-color: #3b82f6;
+    background-color: #ffffff;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2);
+}
+
+.submit-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+/* Results Display */
+.result-table-wrapper {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid #e2e8f0;
+    margin-bottom: 16px;
+    margin-top: 20px;
+}
+
+.results-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.results-table th {
+    text-align: left;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #627d98;
+    padding: 8px 12px;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.results-table td {
+    padding: 12px;
+    border-bottom: 1px solid #f1f5f9;
+    color: #102a43;
+    font-size: 14px;
+}
+
+.results-table tr:last-child td {
+    border-bottom: none;
+}
+
+.results-table td strong {
+    color: #102a43;
+    font-weight: 600;
+}
+
+.results-table input {
+    width: 80px;
+    padding: 6px 8px;
+    border: 2px solid #cbd5e1;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: 700;
+    color: #102a43;
+    background: #ffffff;
+    outline: none;
+    font-family: inherit;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.results-table input:focus {
+    border-color: #3b82f6;
+}
+
+/* Polarity Callout / Footnote */
+.footnote {
+    background: #eff6ff;
+    border-left: 4px solid #3b82f6;
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    color: #1e40af;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 15px;
+}
+
+/* Explanation Section */
+.explanation-section {
+    display: none;
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #e2e8f0;
+    margin-top: 15px;
+}
+
+.explanation-section.show {
+    display: block;
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.explanation-section h3 {
+    color: #1e3a8a;
+    font-size: 15px;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.explanation-section p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #475569;
+    margin-bottom: 12px;
+    text-align: justify;
+}
+
+.explanation-section p:last-child {
+    margin-bottom: 0;
+}
+
+/* Responsive (Mobile/Tablets) */
+@media (max-width: 900px) {
     body {
-      font-family: 'Times New Roman', Times, serif;
-      background: #eef2f7;
-      padding: 30px 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+        height: auto;
+        overflow: auto;
+        padding: 10px;
     }
 
-    .container {
-      max-width: 880px;
-      width: 100%;
-      background: #ffffff;
-      padding: 40px 45px 50px;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-      border-radius: 28px;
-      transition: 0.2s;
-      border: 1px solid rgba(220, 225, 235, 0.4);
+    .app-layout {
+        grid-template-columns: 1fr;
+        height: auto;
     }
 
-    h1 {
-      font-size: 2.4rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      color: #0b1f3b;
-      border-bottom: 3px solid #1a4d8c;
-      padding-bottom: 14px;
-      margin: 0 0 28px 0;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    h1 small {
-      font-size: 1rem;
-      font-weight: 400;
-      background: #dce7f5;
-      padding: 0.2rem 1.2rem;
-      border-radius: 40px;
-      color: #1a3f6b;
-      letter-spacing: 0.3px;
+    .panel {
+        height: auto;
     }
 
-    /* video */
-    .video-section {
-      text-align: center;
-      margin-bottom: 40px;
-      background: #f8faff;
-      padding: 14px 14px 10px;
-      border-radius: 28px;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.02);
-      border: 1px solid #e6edf6;
+    .video-container {
+        height: 280px;
     }
-    .video-section video {
-      max-width: 100%;
-      border-radius: 18px;
-      border: 1px solid #d4dfec;
-      background: #0b1e2f;
-      display: block;
-      margin: 0 auto;
-    }
-
-    /* row info */
-    .row {
-      margin: 24px 0 18px 0;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 12px 28px;
-      background: #f4f9ff;
-      padding: 12px 24px;
-      border-radius: 60px;
-      border: 1px solid #dce6f2;
-    }
-    .row strong {
-      font-weight: 700;
-      color: #10345e;
-      font-size: 1.1rem;
-    }
-    .row span {
-      background: white;
-      padding: 0.1rem 1.2rem;
-      border-radius: 40px;
-      font-weight: 600;
-      color: #1a4880;
-    }
-
-    /* select + button */
-    .control-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 18px 30px;
-      margin: 28px 0 16px 0;
-      background: #fafdff;
-      padding: 12px 22px;
-      border-radius: 60px;
-      border: 1px solid #e2eaf5;
-    }
-    .control-row label {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: #0b2a4e;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-    select {
-      flex: 2 1 320px;
-      padding: 12px 18px;
-      border: 2px solid #c7d6e8;
-      border-radius: 60px;
-      background: white;
-      font-size: 1rem;
-      font-family: 'Times New Roman', serif;
-      color: #0b2744;
-      cursor: pointer;
-      transition: 0.15s;
-    }
-    select:focus {
-      outline: none;
-      border-color: #1a5bb5;
-      box-shadow: 0 0 0 4px rgba(26, 91, 181, 0.12);
-    }
-    #submit {
-      background: #1a4d8c;
-      border: none;
-      padding: 12px 32px;
-      border-radius: 60px;
-      font-weight: 600;
-      font-size: 1.1rem;
-      color: white;
-      cursor: pointer;
-      transition: 0.15s;
-      box-shadow: 0 6px 14px rgba(26, 77, 140, 0.25);
-      border: 1px solid rgba(255,255,255,0.15);
-      font-family: 'Times New Roman', serif;
-    }
-    #submit:hover {
-      background: #12407a;
-      transform: scale(1.02);
-      box-shadow: 0 10px 20px rgba(26, 77, 140, 0.3);
-    }
-    #submit:active { transform: scale(0.97); }
-
-    /* result table */
-    .result {
-      margin-top: 34px;
-      background: #f9fcff;
-      border-radius: 32px;
-      padding: 6px 8px 22px 8px;
-    }
-    .result table {
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0 10px;
-    }
-    .result td {
-      padding: 16px 18px;
-      background: white;
-      border-radius: 18px;
-      border-left: 6px solid #1a5bb5;
-      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.02);
-      font-size: 1.05rem;
-      color: #102a47;
-    }
-    .result td:first-child {
-      width: 220px;
-      font-weight: 600;
-      color: #0b2a50;
-    }
-    .result td strong {
-      font-weight: 700;
-      color: #0b2a50;
-    }
-    .result td input {
-      border: 2px solid #d2dfef;
-      padding: 10px 6px;
-      width: 80px;
-      border-radius: 60px;
-      text-align: center;
-      font-weight: 700;
-      font-size: 1.2rem;
-      background: #f4faff;
-      color: #0b2a4a;
-      transition: 0.15s;
-      font-family: 'Times New Roman', serif;
-    }
-    .result td input:focus {
-      outline: none;
-      border-color: #1a5bb5;
-      background: white;
-    }
-
-    .result .footnote {
-      margin: 18px 0 0 0;
-      padding: 14px 16px;
-      background: #dce8f7;
-      border-radius: 60px;
-      text-align: center;
-      font-weight: 700;
-      color: #10345e;
-      letter-spacing: 0.4px;
-      border: 1px solid #bfd2ea;
-    }
-
-    /* explanation */
-    .explanation {
-      display: none;
-      margin-top: 48px;
-      background: #e3edfa;
-      padding: 28px 34px;
-      border-radius: 32px;
-      border-left: 8px solid #1a4d8c;
-      box-shadow: inset 0 1px 6px rgba(0,0,0,0.02);
-    }
-    .explanation h2 {
-      color: #123a70;
-      font-size: 2rem;
-      font-weight: 600;
-      margin-top: 0;
-      margin-bottom: 20px;
-      letter-spacing: -0.2px;
-    }
-    .explanation p {
-      line-height: 1.8;
-      color: #1f3c62;
-      font-size: 1.08rem;
-      margin-bottom: 1.2rem;
-      text-align: justify;
-    }
-
-    /* mobile */
-    @media (max-width: 700px) {
-      .container { padding: 24px 18px; }
-      h1 { font-size: 2rem; flex-direction: column; align-items: flex-start; gap: 4px; }
-      .row { flex-direction: column; align-items: flex-start; gap: 8px; border-radius: 28px; }
-      .control-row { flex-direction: column; align-items: stretch; border-radius: 28px; }
-      select { width: 100%; }
-      #submit { width: 100%; justify-content: center; }
-      .result td { display: block; width: 100%; margin-bottom: 6px; }
-      .result td:first-child { width: 100%; }
-      .result table, .result tr { display: block; width: 100%; }
-      .result table { border-spacing: 0 12px; }
-      .explanation { padding: 22px 18px; }
-    }
-  </style>
+}
+</style>
 </head>
 <body>
 
-<div class="container">
+<div class="header">
+    <h1>🧬 Amino Acid TLC <small>cellulose stationary phase</small></h1>
+</div>
 
-  <h1>
-    🧬 Amino acid TLC
-    <small>cellulose stationary phase</small>
-  </h1>
+<div class="app-layout">
+    <!-- Left Column: Video Animation -->
+    <div class="panel left-panel">
+        <h2>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-video" style="color: #3b82f6;"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+            Experiment Animation
+        </h2>
+        <div class="video-container">
+            <video controls autoplay loop muted>
+                <source src="images/Final_Exp2.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
 
-  <!-- video -->
-  <div class="video-section">
-    <video width="700" controls autoplay loop muted>
-      <source src="images/Final_Exp2.mp4" type="video/mp4">
-      <!-- fallback message -->
-      <p style="padding: 30px; background: #dce7f5; border-radius: 20px;">🎬 Video preview (Final_Exp2.mp4)</p>
-    </video>
-  </div>
+    <!-- Right Column: Simulation & Results -->
+    <div class="panel right-panel">
+        <h2>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sliders" style="color: #3b82f6;"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+            Simulation Parameters
+        </h2>
 
-  <!-- info bar -->
-  <div class="row">
-    <strong>🧴 Stationary Phase:</strong> <span>Cellulose</span>
-    <strong>⏳ Saturation time:</strong> <span>15 min</span>
-  </div>
+        <div class="scrollable-content">
+            <div class="meta-grid">
+                <div class="meta-badge">
+                    <strong>Stationary Phase</strong>
+                    Cellulose
+                </div>
+                <div class="meta-badge">
+                    <strong>Saturation Time</strong>
+                    15 minutes
+                </div>
+            </div>
 
-  <!-- solvent + submit -->
-  <div class="control-row">
-    <label for="one">💧 Solvent System</label>
-    <select name="one" id="one">
-      <option value="None">— select —</option>
-      <option value="[Acidic] (n-butanol: water: acetic acid (3:2:0.5)">[Acidic] n-butanol : water : acetic acid (3:2:0.5)</option>
-      <option value="[Acidic] (n-butanol: water: acetic acid (3:1:1)">[Acidic] n-butanol : water : acetic acid (3:1:1)</option>
-      <option value="[Basic] EtOH: water: ammonia (10:2.5:1.25)">[Basic] EtOH : water : ammonia (10:2.5:1.25)</option>
-      <option value="[Basic] (n-butanol: water: acetic acid (3:2:0.5)">[Basic] n-butanol : water : acetic acid (3:2:0.5)</option>
-    </select>
-    <button id="submit" onclick="setVisibility()">Submit</button>
-  </div>
+            <div class="control-group">
+                <label for="one">💧 Solvent System</label>
+                <div class="select-wrapper">
+                    <select name="one" id="one">
+                        <option value="None">— select —</option>
+                        <option value="[Acidic] (n-butanol: water: acetic acid (3:2:0.5)">[Acidic] n-butanol : water : acetic acid (3:2:0.5)</option>
+                        <option value="[Acidic] (n-butanol: water: acetic acid (3:1:1)">[Acidic] n-butanol : water : acetic acid (3:1:1)</option>
+                        <option value="[Basic] EtOH: water: ammonia (10:2.5:1.25)">[Basic] EtOH : water : ammonia (10:2.5:1.25)</option>
+                        <option value="[Basic] (n-butanol: water: acetic acid (3:2:0.5)">[Basic] n-butanol : water : acetic acid (3:2:0.5)</option>
+                    </select>
+                </div>
+                <button class="submit-btn" id="submit" onclick="setVisibility()">Submit</button>
+            </div>
 
-  <!-- result -->
-  <div class="result">
-    <table>
-      <tr>
-        <td><strong>Optimum R<sub>f</sub> (reference)</strong></td>
-        <td><strong>Simulation R<sub>f</sub></strong></td>
-      </tr>
-      <tr>
-        <td>Aspartic acid : 0.28</td>
-        <td>Aspartic acid : <input type="text" id="aspartic" readonly placeholder="—"></td>
-      </tr>
-      <tr>
-        <td>Lysine : 0.15</td>
-        <td>Lysine : <input type="text" id="lysine" readonly placeholder="—"></td>
-      </tr>
-      <tr>
-        <td>Leucine : 0.74</td>
-        <td>Leucine : <input type="text" id="leucine" readonly placeholder="—"></td>
-      </tr>
-    </table>
-    <div class="footnote">⚡ R<sub>f</sub> VALUE DEPENDS ON POLARITY & pH OF SOLVENT SYSTEM</div>
-  </div>
+            <div class="result-table-wrapper">
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th>Optimum R<sub>f</sub> (reference)</th>
+                            <th>Simulation R<sub>f</sub></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Aspartic acid : <strong>0.28</strong></td>
+                            <td>Aspartic acid : <input type="text" id="aspartic" readonly placeholder="—"></td>
+                        </tr>
+                        <tr>
+                            <td>Lysine : <strong>0.15</strong></td>
+                            <td>Lysine : <input type="text" id="lysine" readonly placeholder="—"></td>
+                        </tr>
+                        <tr>
+                            <td>Leucine : <strong>0.74</strong></td>
+                            <td>Leucine : <input type="text" id="leucine" readonly placeholder="—"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="footnote">⚡ R<sub>f</sub> VALUE DEPENDS ON POLARITY & pH OF SOLVENT SYSTEM</div>
+            </div>
 
-  <!-- explanation (hidden) -->
-  <div class="explanation" id="explanation">
-    <h2>📖 EXPLANATION</h2>
-    <p id="expText">
-      Amino acids exhibit different Rf values depending upon the pH of the solvent system. Acidic amino acids (Aspartic acid) shows increase in Rf values with increase acidic nature of the solvent system. Basic amino acids (Lysine) shows decrease in Rf values with increase in acidic nature of the solvent system. However, no mark effect is observed in neutral amino acid (Leucine). The reverse effects in terms of Rf value are obtained with basic nature of solvent system as expected.
-    </p>
-    <p>
-      The polarity of a solvent system to be used for chromatography is evaluated by examining the dielectric constant and dipole moment of the solvent. The larger these two numbers, the more polar is the solvent. In addition, the hydrogen bonding ability of the solvent is also considered.
-    </p>
-  </div>
-
+            <!-- Explanation Section -->
+            <div class="explanation-section" id="explanation">
+                <h3>📖 EXPLANATION</h3>
+                <p id="expText">
+                    Amino acids exhibit different Rf values depending upon the pH of the solvent system. Acidic amino acids (Aspartic acid) shows increase in Rf values with increase acidic nature of the solvent system. Basic amino acids (Lysine) shows decrease in Rf values with increase in acidic nature of the solvent system. However, no mark effect is observed in neutral amino acid (Leucine). The reverse effects in terms of Rf value are obtained with basic nature of solvent system as expected.
+                </p>
+                <p>
+                    The polarity of a solvent system to be used for chromatography is evaluated by examining the dielectric constant and dipole moment of the solvent. The larger these two numbers, the more polar is the solvent. In addition, the hydrogen bonding ability of the solvent is also considered.
+                </p>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
@@ -379,16 +513,14 @@
       leucine.value = data.leucine;
       expText.innerHTML = data.explanation;
       explanation.style.display = "block";
+      explanation.classList.add("show");
     } else {
       // clear fields & hide explanation
       aspartic.value = "";
       lysine.value = "";
       leucine.value = "";
       explanation.style.display = "none";
-      if (solvent === "None") {
-        // optionally show a gentle reminder
-        // but we keep it silent; only clear
-      }
+      explanation.classList.remove("show");
     }
   }
 
@@ -400,6 +532,7 @@
       document.getElementById("lysine").value = "";
       document.getElementById("leucine").value = "";
       document.getElementById("explanation").style.display = "none";
+      document.getElementById("explanation").classList.remove("show");
     }
   });
 </script>
