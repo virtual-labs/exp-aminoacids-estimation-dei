@@ -1,0 +1,90 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "1. Which is acidic amino acid?",
+      "answers": {
+        "a": "Glutamic acid",
+        "b": "Aspartic acid",
+        "c": "Both",
+        "d": "None"
+      },
+      "explanations": {
+        "a": "Glutamic acid is acidic but not the only acidic amino acid listed.",
+        "b": "Aspartic acid is acidic but not the only acidic amino acid listed.",
+        "c": "Correct. Both glutamic acid and aspartic acid are acidic amino acids.",
+        "d": "Incorrect."
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "2. Which of the following amino acids is NOT positively charged?",
+      "answers": {
+        "a": "Histidine",
+        "b": "Lysine",
+        "c": "Aspartic acid",
+        "d": "Arginine"
+      },
+      "explanations": {
+        "a": "Incorrect. Histidine is classified as a basic amino acid.",
+        "b": "Incorrect. Lysine carries a positive charge at physiological pH.",
+        "c": "Correct. Aspartic acid is negatively charged, not positively charged.",
+        "d": "Incorrect. Arginine is positively charged."
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "3. An essential amino acid is- ",
+      "answers": {
+        "a": "Must be provided in the diet",
+        "b": "Is missing from the diet",
+        "c": "Synthesized in the body",
+        "d": "Does not exist as a zwitterion"
+      },
+      "explanations": {
+        "a": "Correct. Essential amino acids cannot be synthesized in sufficient amounts and must be obtained from food.",
+        "b": "Incorrect.",
+        "c": "Incorrect. Essential amino acids are not synthesized adequately by the body.",
+        "d": "Incorrect. Amino acids generally exist as zwitterions."
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "4. Which is a basic amino acid with a positive charge?",
+      "answers": {
+        "a": "Glutamic acid",
+        "b": "Lysine",
+        "c": "Tryptophan",
+        "d": "Glutamine"
+      },
+      "explanations": {
+        "a": "Incorrect. Glutamic acid is acidic.",
+        "b": "Correct. Lysine is a basic amino acid carrying a positive charge.",
+        "c": "Incorrect. Tryptophan is neutral.",
+        "d": "Incorrect. Glutamine is neutral."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "5. When alanine and lysine form an amide bond, the product would be- ",
+      "answers": {
+        "a": "Dipeptide",
+        "b": "Alanyllysine",
+        "c": "Lysylalanine",
+        "d": "None of them"
+      },
+      "explanations": {
+        "a": "The product is a dipeptide, but a more specific name can be assigned.",
+        "b": "Correct. When alanine is at the N-terminus and lysine at the C-terminus, the dipeptide is named alanyllysine.",
+        "c": "Incorrect. This would represent the reverse sequence.",
+        "d": "Incorrect."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    }
+  ]
+}
